@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -20,6 +22,11 @@ import { UserModule } from './modules/user/user.module';
         autoLoadEntities: true,
       }
     ),
+    // GraphQLModule注入
+    GraphQLModule.forRoot({
+      driver: ApolloDriver, // apollo驱动器
+      autoSchemaFile: true
+    }),
     UserModule
   ],
   controllers: [AppController],
